@@ -25,7 +25,7 @@
       "path": "lang/en.json"
     }
   ],
-  "manifest": "https://www.vtta.io/download/vtta-tokens/module.json",
+  "manifest": "https://github.com/DanielTheBard/vtta-tokens/blob/main/module.json",
   "download": "https://www.vtta.io/download/vtta-tokens",
 
   "styles": [
