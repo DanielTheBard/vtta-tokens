@@ -265,11 +265,11 @@ class UI {
             await this.loadActorTokens();
           } else {
             // update the actor with the (perhaps new) token path
-            if (result.path && result.path !== this.actor.data.token.img) {
+            if (result.path && result.path !== this.actor.data.token.texture.src) {
               let tokenUrl = result.path.replace(/\?[t=]*\d+$/, "");
               tokenUrl = `${tokenUrl}?${+new Date()}`;
               await this.actor.update({
-                "token.img": tokenUrl,
+                "token.texture.src": tokenUrl,
               });
             }
           }
@@ -365,9 +365,9 @@ class UI {
     };
 
     const generateNextWildcardTokenFilename = (tokenFilenames) => {
-      if (this.actor.data.token.img.indexOf("*") === -1) {
+      if (this.actor.data.token.texture.src.indexOf("*") === -1) {
         // wildcard is set, but no wildcard found, let's hope the user knows what he is doing.
-        return DirectoryPicker.descriptorFromURL(this.actor.data.token.img);
+        return DirectoryPicker.descriptorFromURL(this.actor.data.token.texture.src);
       }
 
       // generate a wildcard token filename based on the wildcard
@@ -376,7 +376,7 @@ class UI {
       do {
         count++;
         const index = count.toString().padStart(3, "0");
-        generatedFilename = this.actor.data.token.img
+        generatedFilename = this.actor.data.token.texture.src
           .replace(/\?\d+$/, "")
           .replace(/\*/, index); // replace only the first wildcard to allow wildcard file extensions that are not getting replaced
       } while (
@@ -420,17 +420,17 @@ class UI {
 
     const DEFAULT_TOKEN = "icons/svg/mystery-man.svg";
     const tokenImages = await loadExistingTokens();
-    let baseTokenFilename = this.actor.data.token.img.replace(/\?\d+$/, "");
+    let baseTokenFilename = this.actor.data.token.texture.src.replace(/\?\d+$/, "");
 
     const isWildCardToken =
       this.actor.data.token.randomImg && baseTokenFilename.indexOf("*") !== -1;
 
     const isDefaultTokenImage =
-      this.actor.data.token.img === "" ||
-      this.actor.data.token.img === null ||
-      this.actor.data.token.img === DEFAULT_TOKEN;
+      this.actor.data.token.texture.src === "" ||
+      this.actor.data.token.texture.src === null ||
+      this.actor.data.token.texture.src === DEFAULT_TOKEN;
 
-    //let baseTokenFilename = this.actor.data.token.img;
+    //let baseTokenFilename = this.actor.data.token.texture.src;
 
     // remove any excess
     //baseTokenFilename = baseTokenFilename.replace(/\?t=\d+$/, "");
